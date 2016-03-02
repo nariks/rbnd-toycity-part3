@@ -32,6 +32,14 @@ class Product
     @stock > 0 ? true : false
   end
 
+  def self.in_stock
+    prod_in_stock = []
+    @@products.each do |product|
+      product.in_stock? ? prod_in_stock << product : nil
+    end
+    return prod_in_stock
+  end
+
 
 
 
