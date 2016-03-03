@@ -15,24 +15,24 @@ class Product
     @@products
   end
 
+  #add new product after checking it doesn't exist.
   def add_to_products
-    @@products.each do |product|
-      raise DuplicateProductError, "#{@title} already exists \n"  if product.title == @title
-    end
-
+    err_msg = "#{@title} already exists \n"
+    @@products.each {|product| raise DuplicateProductError, err_msg if product.title == @title }
     @@products << self
   end
 
+  #To check if a product title exists already
   def self.find_by_title(title)
-    @@products.each do |product|
-        return product if product.title == title
-    end
+    @@products.each {|product| return product if product.title == title}
   end
 
+  #To check if a product has stock available
   def in_stock?
     @stock > 0 ? true : false
   end
 
+  #to returns an array of all products in stock
   def self.in_stock
     prod_in_stock = []
     @@products.each do |product|

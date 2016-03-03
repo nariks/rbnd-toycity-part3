@@ -10,7 +10,7 @@ class Transaction
     @product = product
     @@id += 1
     @id = @@id
-    product.stock -= 1
+    product.stock -= 1                                         #reduce stock qty when a purchase transaction occurs
     @@transactions << self
   end
 
@@ -18,10 +18,9 @@ class Transaction
     @@transactions
   end
 
+  #Searches for a transaction by id and returns transation details.
   def self.find(id)
-    @@transactions.each do |transaction|
-      return transaction if transaction.id == id
-    end
+    @@transactions.each {|transaction| transaction if transaction.id == id }
   end
 
 end
