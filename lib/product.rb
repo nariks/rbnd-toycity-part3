@@ -22,9 +22,10 @@ class Product
     @@products << self
   end
 
-  #To check if a product title exists already
+  #To check if a product title exists
   def self.find_by_title(title)
     @@products.each {|product| return product if product.title == title}
+    raise NoSuchProductError, "#{title} is not available"                                                       #error raised if no match found
   end
 
   #To check if a product has stock available
@@ -35,14 +36,8 @@ class Product
   #to returns an array of all products in stock
   def self.in_stock
     prod_in_stock = []
-    @@products.each do |product|
-      product.in_stock? ? prod_in_stock << product : nil
-    end
+    @@products.each { |product| prod_in_stock << product if product.in_stock? }
     return prod_in_stock
   end
-
-
-
-
 
 end

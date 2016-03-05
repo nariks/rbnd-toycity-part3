@@ -18,6 +18,7 @@ class Customer
   #to check if a customer exists
   def self.find_by_name(name)
     @@customers.each {|customer| return customer if customer.name == name }
+    raise NoSuchCustomerError, "No customer called #{name} exists on file"                          #error raised if no match found
   end
 
   def self.all
@@ -26,12 +27,8 @@ class Customer
 
   #to initiate a purchase transation after checking if stock is available
   def purchase(product)
-    if product.in_stock?
-      Transaction.new(@name, product)
-      "#{@name} has purchased product #{product.title}"
-    else
-      raise OutOfStockError, "#{product.title} is out of stock"
-    end
+    return Transaction.new(self, product) if product.in_stock?                                            #register purchase transaction if there is stock on hand
+    raise OutOfStockError, "#{product.title} is out of stock"                                                   #error raised if 0 stock on hand
   end
 
 end

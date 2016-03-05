@@ -1,0 +1,21 @@
+How long did you spend working on this project?
+I worked around 4 hours on and off to complete the project
+
+What was the most rewarding challenge you conquered?
+The most rewarding challenge I conquered was when I made the add_to_products in the product class.
+This took me a while to figure this out, but once this was achieved all others pretty much fell into place
+
+What two additional features did you build? Why?
+a) Feature 1 - Added additional error handling for find_by_name method for Product and Customer class & find(id) method for 4
+                    Transaction class when there is no match from the search. This provides the user with proper feedback if a
+                    non existent item is being searched for.
+
+b) Feature 2 - Added two new class methods for Transaction class
+                  find_by_cust method - returns all products purchased by a particular customer
+                  find_by_prod method - returns all customers who purchased a particular product
+
+                  These 2 methods provide further detailed reporting to help manager in the decision making process.
+
+Where do you still have room to grow?
+I think I have a lot of room to grow in understanding and implementing
+ object oriented design.

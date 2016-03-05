@@ -17,6 +17,7 @@ puts Product.all.count # Should return 3
 
 nanoblock = Product.find_by_title("Nano Block Empire State Building")
 firehouse = Product.find_by_title("LEGO Firehouse Headquarter")
+ironman = Product.find_by_title("LEGO Iron Man vs. Ultron")
 
 puts nanoblock.title # Should return 'Nano Block Empire State Building'
 puts nanoblock.price # Should return 49.99
@@ -58,10 +59,50 @@ puts nanoblock.stock # Should return 11
 
 puts walter.purchase(nanoblock)
 
+
 puts Transaction.all.count # Should return 2
 
 transaction2 = Transaction.find(2)
 puts transaction2.product == nanoblock # Should return true
 
-walter.purchase(firehouse)
+# walter.purchase(firehouse)
 #Should return OutOfStockError: 'LEGO Firehouse Headquarter' is out of stock.
+
+#-------------------------------------------------
+#The following lines of code have been added to test out the find_by_cust & find_by_cust methods
+#of transaction class. find_by_cust returns all products purchased by a customer and
+#find_by_prod returns all unique customers who purchased that a product.
+puts "\nOutputs added to test the new Transaction methods"
+puts "==================================================="
+Product.new(title: "LEGO Tin Man", price: 220.99, stock: 155)
+Product.new(title: "Empire State Building", price: 149.99, stock: 2)
+Product.new(title: "Police Headquarter", price: 99.99, stock: 10)
+
+tinman = Product.find_by_title("LEGO Tin Man")
+empire = Product.find_by_title("Empire State Building")
+police = Product.find_by_title("Police Headquarter")
+
+Customer.new(name: "Don Quixote")
+Customer.new(name: "Prof Moriarty")
+
+don = Customer.find_by_name("Don Quixote")
+prof = Customer.find_by_name("Prof Moriarty")
+don.purchase(tinman)
+prof.purchase(empire)
+walter.purchase(police)
+don.purchase(empire)
+puts "\nProducts purchased by Walter Latimer"
+puts "======================================="
+puts Transaction.find_by_cust("Walter Latimer")
+puts "\nProducts purchased by Don Quixote"
+puts "======================================="
+puts Transaction.find_by_cust("Don Quixote")
+puts "\nProducts purchased by Prof Moriarty"
+puts "======================================="
+puts Transaction.find_by_cust("Prof Moriarty")
+puts "\nCustomers who bought Empire State Building"
+puts "=========================================="
+puts Transaction.find_by_product(empire)
+puts "\nCustomers who bought Nanoblock"
+puts "======================================="
+puts Transaction.find_by_product(nanoblock)
